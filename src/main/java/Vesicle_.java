@@ -27,10 +27,10 @@ import ij.measure.*;
 interface Version {
     String title = "Vesicle";
     String author = "Max Larsson";
-    String version = "1.0pre1";
-    String year = "2014";
-    String month = "November";
-    String day = "11";
+    String version = "1.0pre2";
+    String year = "2015";
+    String month = "April";
+    String day = "21";
     String email = "max.larsson@liu.se";
     String homepage = "http://www.hu.liu.se/forskning/larsson-max/software";
 }

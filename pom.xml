@@ -8,7 +8,7 @@
 
 	<groupId>sc.fiji</groupId>
 	<artifactId>Vesicle_</artifactId>
-	<version>1.0pre1</version>
+	<version>1.0pre2</version>
 
 	<name>plugins/Vesicle_.jar</name>
 	<description>A Maven project for the Vesicle plugin</description>
