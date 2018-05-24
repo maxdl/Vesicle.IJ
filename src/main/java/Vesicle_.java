@@ -539,7 +539,7 @@ class ProfileData implements Options {
 
 
     public boolean save(ImagePlus imp) {
-        int i;
+        int i, j;
         double pixelwidth;
         String s, unit;
         Polygon pol;
@@ -601,19 +601,19 @@ class ProfileData implements Options {
                 outf.println("  " + IJ.d2s(pol.xpoints[i], 0) + ", "+ IJ.d2s(pol.ypoints[i], 0));
             }
             outf.println("END");
-            for (n = 0; n < this.overlay.size(); n++) {
-                if (this.overlay.get(n).getName().equals("hole")) {
+            for (j = 0; j < this.overlay.size(); j++) {
+                if (this.overlay.get(j).getName().equals("hole")) {
                     outf.println("HOLE");
-                    pol = this.overlay.get(n).getPolygon();
+                    pol = this.overlay.get(j).getPolygon();
                     for (i = 0; i < pol.npoints; i++)
                         outf.println("  " + IJ.d2s(pol.xpoints[i], 0) + ", "+ IJ.d2s(pol.ypoints[i], 0));
                     outf.println("END");
                 }
             }
-            for (n = 0; n < this.overlay.size(); n++) {
-                if (this.overlay.get(n).getName().equals("vesicle")) {
+            for (j = 0; j < this.overlay.size(); j++) {
+                if (this.overlay.get(j).getName().equals("vesicle")) {
                     outf.println("VESICLE");
-                    pol = this.overlay.get(n).getPolygon();
+                    pol = this.overlay.get(j).getPolygon();
                     for (i = 0; i < pol.npoints; i++)
                         outf.println("  " + IJ.d2s(pol.xpoints[i], 0) + ", "+ IJ.d2s(pol.ypoints[i], 0));
                     outf.println("END");
