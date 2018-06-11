@@ -24,19 +24,19 @@ import ij.gui.*;
 import ij.plugin.frame.*;
 import ij.measure.*;
 
-interface Version {
+interface VesicleVersion {
     String title = "Vesicle";
     String author = "Max Larsson";
-    String version = "1.1.2";
+    String version = "1.1.3";
     String year = "2018";
-    String month = "May";
-    String day = "31";
+    String month = "June";
+    String day = "11";
     String email = "max.larsson@liu.se";
-    String homepage = "http://www.hu.liu.se/forskning/larsson-max/software";
+    String homepage = "http://www.liu.se/medfak/forskning/larsson-max/software";
 }
 
 
-interface Options {
+interface VesicleOptions {
     Color profileCol = Color.blue;
     Color vesicleCol = Color.cyan;
     Color pointCol = Color.green;
@@ -46,7 +46,7 @@ interface Options {
 }
 
 
-public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
+public class Vesicle_ extends PlugInFrame implements VesicleOptions, ActionListener {
 
     Panel panel;
     static Frame instance;
@@ -61,7 +61,7 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
     Label randomPlacedLabel;
     Label commentLabel;
     Label scaleLabel;
-    ProfileData profile;
+    VesicleProfile profile;
     ImagePlus imp;
 
 
@@ -72,7 +72,7 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
             return;
         }
         instance = this;
-        profile = new ProfileData();
+        profile = new VesicleProfile();
         IJ.register(Vesicle_.class);
         setLayout(new FlowLayout());
         setBackground(SystemColor.control);
@@ -100,7 +100,7 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
         panel.add(new Label("Other:"));
         addButton("Add comment");
         addButton("Set profile n");
-        addButton("Options...");
+        addButton("VesicleOptions...");
         addButton("About...");
         add(panel);
         pack();
@@ -365,8 +365,8 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
                 profile.dirty = true;
             }
         }
-    if (command.equals("Options...")) {
-            GenericDialog gd = new GenericDialog("Options");
+    if (command.equals("VesicleOptions...")) {
+            GenericDialog gd = new GenericDialog("VesicleOptions");
             gd.setInsets(0, 0, 0);
             gd.addMessage("Random particles:");
             gd.addNumericField("Random particle n:", profile.randompn, 0);
@@ -382,23 +382,23 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
         if (command.equals("About...")) {
             String aboutHtml = String.format("<html><p><strong>%s" +
                                             "</strong></p><br />" +
-                                             "<p>Version %s</p><br />" +
+                                             "<p>VesicleVersion %s</p><br />" +
                                              "<p>Last modified %s %s, %s.</p>" +
                                              "<p> Copyright 2001 - %s %s.</p>" +
                                              "<p> Released under the MIT license. " +
                                              "</p><br />" +
                                              "<p>E-mail: %s</p>" +
                                              "<p>Web: %s</p><br /></html>",
-                                             Version.title,
-                                             Version.version,
-                                             Version.month,
-                                             Version.day,
-                                             Version.year,
-                                             Version.year,
-                                             Version.author,
-                                             Version.email,
-                                             Version.homepage);
-            new HTMLDialog(Version.title, aboutHtml);
+                                             VesicleVersion.title,
+                                             VesicleVersion.version,
+                                             VesicleVersion.month,
+                                             VesicleVersion.day,
+                                             VesicleVersion.year,
+                                             VesicleVersion.year,
+                                             VesicleVersion.author,
+                                             VesicleVersion.email,
+                                             VesicleVersion.homepage);
+            new HTMLDialog(VesicleVersion.title, aboutHtml);
         }
         updateInfoPanel();
         imp.updateAndDraw();
@@ -417,14 +417,14 @@ public class Vesicle_ extends PlugInFrame implements Options, ActionListener {
 } // end of Vesicle_
 
 
-class ProfileData implements Options {
+class VesicleProfile implements VesicleOptions {
     boolean dirty;
     Overlay overlay;
     int n, ntot, randompn, i;
     int imgID;
     String ID, comment, prevImg;
 
-    ProfileData() {
+    VesicleProfile() {
         this.n = 0;
         this.ntot = 1;
         this.prevImg = "";
@@ -576,11 +576,11 @@ class ProfileData implements Options {
                         new FileWriter(sd.getDirectory() +
                                        sd.getFileName())));
             String versionInfo = String.format("# %s version %s (%s %s, %s)",
-                                                Version.title,
-                                                Version.version,
-                                                Version.month,
-                                                Version.day,
-                                                Version.year);
+                                                VesicleVersion.title,
+                                                VesicleVersion.version,
+                                                VesicleVersion.month,
+                                                VesicleVersion.day,
+                                                VesicleVersion.year);
             outf.println(versionInfo);
             outf.println("IMAGE " + imp.getTitle());
             outf.println("PROFILE_ID " + this.ID);
